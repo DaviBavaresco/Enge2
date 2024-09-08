@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "497214676857",
+    "firebase_url": "https://enge3-c3ce2-default-rtdb.firebaseio.com",
+    "project_id": "enge3-c3ce2",
+    "storage_bucket": "enge3-c3ce2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497214676857:android:969597d64c1bb6ab1dd9a8",
+        "android_client_info": {
+          "package_name": "br.edu.ifrs.projetoenge3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_DAxDEEHDi3-SmFAw8QLbJ_9nXt2AN9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

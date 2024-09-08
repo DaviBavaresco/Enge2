@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ProjetoEnge3</string>
+
+    <string-array name="user_types">
+        <item> Aluno </item>
+        <item> SINAP </item>
+        <item> Professor </item>
+    </string-array>
+</resources>
