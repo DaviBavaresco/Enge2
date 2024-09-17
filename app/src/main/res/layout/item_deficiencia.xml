@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewMatricula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Matrícula"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/textViewDeficiencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deficiência"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Adicionando botões para validar ou negar -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/buttonAprovar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aprovar"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/holo_green_dark" />
+
+            <Button
+                android:id="@+id/buttonNegar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Negar"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:layout_marginStart="16dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -31,6 +31,8 @@
         <activity
             android:name=".RegisterActivity"/>
         <activity
+            android:name=".VisualizarDeficienciasPendentesActivity"/>
+        <activity
             android:name=".AlunoInsereDefiActivity"/>
         <activity
             android:name=".ProfessorActivity">

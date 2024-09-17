@@ -1,4 +1,5 @@
 package br.edu.ifrs.projetoenge3;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,9 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -105,20 +108,25 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
 
         // Salvar a deficiência na coleção "deficiencias"
         db.collection("deficiencias").add(dadosDeficiencia)
-                .addOnSuccessListener(new com.google.android.gms.tasks.OnSuccessListener<com.google.firebase.firestore.DocumentReference>() {
-                    @Override
-                    public void onSuccess(com.google.firebase.firestore.DocumentReference documentReference) {
-                        progressBar.setVisibility(View.GONE);
-                        Toast.makeText(AlunoInsereDefiActivity.this, "Deficiência enviada com sucesso!", Toast.LENGTH_SHORT).show();
-                        editTextDeficiencia.setText("");  // Limpar o campo de texto
-                    }
+                .addOnSuccessListener(documentReference -> {
+                    String documentId = documentReference.getId();  // Aqui você obtém o ID do documento
+
+                    // Atualize o documento com o documentId se precisar, ou use esse ID no futuro
+                    db.collection("deficiencias").document(documentId)
+                            .update("documentId", documentId)  // Atualizar com o próprio ID gerado
+                            .addOnSuccessListener(aVoid -> {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(AlunoInsereDefiActivity.this, "Deficiência enviada com sucesso!", Toast.LENGTH_SHORT).show();
+                                editTextDeficiencia.setText("");  // Limpar o campo de texto
+                            })
+                            .addOnFailureListener(e -> {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(AlunoInsereDefiActivity.this, "Erro ao salvar o documentId: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
                 })
-                .addOnFailureListener(new com.google.android.gms.tasks.OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressBar.setVisibility(View.GONE);
-                        Toast.makeText(AlunoInsereDefiActivity.this, "Erro ao enviar deficiência: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                .addOnFailureListener(e -> {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(AlunoInsereDefiActivity.this, "Erro ao enviar deficiência: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 }
