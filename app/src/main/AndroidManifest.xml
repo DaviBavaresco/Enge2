@@ -33,6 +33,12 @@
         <activity
             android:name=".VisualizarDeficienciasPendentesActivity"/>
         <activity
+            android:name=".VisualizarDeficienciasAprovadasActivity"/>
+        <activity
+            android:name=".VisualizarDeficienciasNegadasActivity"/>
+        <activity
+            android:name=".VisualizarTodasDeficienciasEnviadasActivity"/>
+        <activity
             android:name=".AlunoInsereDefiActivity"/>
         <activity
             android:name=".ProfessorActivity">

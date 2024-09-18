@@ -13,24 +13,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class AlunoActivity extends AppCompatActivity {
 
-    private Button btnCadastrar;
+
     private Button btnInsere;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_aluno);
-        btnCadastrar = findViewById(R.id.button);
         btnInsere = findViewById(R.id.btnInsere);
-
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AlunoActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-
-        });
 
         btnInsere.setOnClickListener(new View.OnClickListener() {
             @Override

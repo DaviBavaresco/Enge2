@@ -35,6 +35,7 @@ public class DeficienciaAdapter extends RecyclerView.Adapter<DeficienciaAdapter.
 
         holder.textViewMatricula.setText("Matrícula: " + deficiencia.getMatricula());
         holder.textViewDeficiencia.setText("Deficiência: " + deficiencia.getDeficiencia());
+        holder.textViewStatus.setText("Status: " + deficiencia.getStatus());
 
         if (deficiencia.getDocumentId() == null) {
             holder.textViewMatricula.setText("Erro: documentId não encontrado");
@@ -80,6 +81,7 @@ public class DeficienciaAdapter extends RecyclerView.Adapter<DeficienciaAdapter.
     public static class DeficienciaViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewMatricula;
         public TextView textViewDeficiencia;
+        public TextView textViewStatus;
         public Button buttonAprovar;
         public Button buttonNegar;
 
@@ -87,6 +89,7 @@ public class DeficienciaAdapter extends RecyclerView.Adapter<DeficienciaAdapter.
             super(itemView);
             textViewMatricula = itemView.findViewById(R.id.textViewMatricula);
             textViewDeficiencia = itemView.findViewById(R.id.textViewDeficiencia);
+            textViewStatus = itemView.findViewById(R.id.textViewStatus);
             buttonAprovar = itemView.findViewById(R.id.buttonAprovar);
             buttonNegar = itemView.findViewById(R.id.buttonNegar);
         }

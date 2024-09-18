@@ -4,6 +4,7 @@ public class Deficiencia {
     private String documentId;
     private String matricula;
     private String deficiencia;
+    private String status;
 
     public Deficiencia() {
         // Construtor vazio necessário para o Firebase
@@ -37,5 +38,13 @@ public class Deficiencia {
 
     public void setDeficiencia(String deficiencia) {
         this.deficiencia = deficiencia;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
