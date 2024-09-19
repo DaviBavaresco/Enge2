@@ -12,6 +12,12 @@
         android:layout_height="wrap_content"
         android:hint="Insira sua deficiência" />
 
+    <EditText
+        android:id="@+id/editTextExplica"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Explique sua deficiência" />
+
     <Button
         android:id="@+id/buttonEnviarDeficiencia"
         android:layout_width="match_parent"
@@ -23,4 +29,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone" />
+    <Button
+        android:id="@+id/buttonListarDeficiencias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Listar Deficiências"
+        android:layout_below="@+id/buttonEnviarDeficiencia"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>
