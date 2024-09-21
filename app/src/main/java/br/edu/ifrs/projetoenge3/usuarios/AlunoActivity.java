@@ -1,4 +1,4 @@
-package br.edu.ifrs.projetoenge3;
+package br.edu.ifrs.projetoenge3.usuarios;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import br.edu.ifrs.projetoenge3.AlunoInsereDefiActivity;
+import br.edu.ifrs.projetoenge3.R;
 
 public class AlunoActivity extends AppCompatActivity {
 

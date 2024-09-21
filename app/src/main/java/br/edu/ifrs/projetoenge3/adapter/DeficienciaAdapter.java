@@ -1,4 +1,4 @@
-package br.edu.ifrs.projetoenge3;
+package br.edu.ifrs.projetoenge3.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
+import br.edu.ifrs.projetoenge3.R;
 
 public class DeficienciaAdapter extends RecyclerView.Adapter<DeficienciaAdapter.DeficienciaViewHolder> {
 
-    private List<Deficiencia> deficienciaList;
+     List<Deficiencia> deficienciaList;
+    public List<Deficiencia> deficienciaListFull;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public DeficienciaAdapter(List<Deficiencia> deficienciaList) {
         this.deficienciaList = deficienciaList;
+        this.deficienciaListFull = new ArrayList<>(deficienciaList);
     }
 
     @NonNull
@@ -76,6 +82,23 @@ public class DeficienciaAdapter extends RecyclerView.Adapter<DeficienciaAdapter.
     @Override
     public int getItemCount() {
         return deficienciaList.size();
+    }
+
+    public void filterByMatricula(String matricula) {
+        if (matricula.isEmpty()) {
+            deficienciaList.clear();
+            deficienciaList.addAll(deficienciaListFull);
+        } else {
+            List<Deficiencia> filteredList = new ArrayList<>();
+            for (Deficiencia deficiencia : deficienciaListFull) {
+                if (deficiencia.getMatricula().toLowerCase().contains(matricula.toLowerCase())) {
+                    filteredList.add(deficiencia);
+                }
+            }
+            deficienciaList.clear();
+            deficienciaList.addAll(filteredList);
+        }
+        notifyDataSetChanged(); // Atualizar a RecyclerView com a lista filtrada
     }
 
     // Classe ViewHolder

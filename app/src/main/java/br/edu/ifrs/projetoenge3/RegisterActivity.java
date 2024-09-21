@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText emailField, passwordField, nomeField, cpfField, matriculaField, deficienciaField;
+    private EditText emailField, passwordField, nomeField, cpfField, matriculaField;
     private Spinner userTypeSpinner;
     private Button registerButton;
     private LinearLayout layoutAluno, layoutSINAP, layoutProfessor;
@@ -43,7 +43,6 @@ public class RegisterActivity extends AppCompatActivity {
         nomeField = findViewById(R.id.editTextNome);
         cpfField = findViewById(R.id.editTextCPF);
         matriculaField = findViewById(R.id.editTextMatricula);
-        deficienciaField = findViewById(R.id.editTextDeficiencia);
         userTypeSpinner = findViewById(R.id.spinnerUserType);
         registerButton = findViewById(R.id.buttonRegister);
         layoutAluno = findViewById(R.id.layoutAluno);
@@ -106,12 +105,10 @@ public class RegisterActivity extends AppCompatActivity {
                                 String nome = nomeField.getText().toString().trim();
                                 String cpf = cpfField.getText().toString().trim();
                                 String matricula = matriculaField.getText().toString().trim();
-                                String deficiencia = deficienciaField.getText().toString().trim();
 
                                 userMap.put("nome", nome);
                                 userMap.put("CPF", cpf);
                                 userMap.put("matricula", matricula);
-                                userMap.put("deficiencia", deficiencia);
 
                             } // SINAP e Professor podem ter campos adicionais aqui
 

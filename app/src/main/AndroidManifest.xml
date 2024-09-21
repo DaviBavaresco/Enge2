@@ -25,25 +25,25 @@
                 android:name=".MainActivity"
                 android:label="@string/app_name" />
         <activity
-            android:name=".AlunoActivity"/>
+            android:name=".usuarios.AlunoActivity"/>
         <activity
-            android:name=".SinapActivity"/>
+            android:name=".usuarios.SinapActivity"/>
         <activity
             android:name=".RegisterActivity"/>
         <activity
-            android:name=".VisualizarDeficienciasPendentesActivity"/>
+            android:name=".visualizacao.VisualizarDeficienciasPendentesActivity"/>
         <activity
-            android:name=".VisualizarDeficienciasAprovadasActivity"/>
+            android:name=".visualizacao.VisualizarDeficienciasAprovadasActivity"/>
         <activity
-            android:name=".VisualizarDeficienciasNegadasActivity"/>
+            android:name=".visualizacao.VisualizarDeficienciasNegadasActivity"/>
         <activity
-            android:name=".VisualizarTodasDeficienciasEnviadasActivity"/>
+            android:name=".visualizacao.VisualizarTodasDeficienciasEnviadasActivity"/>
         <activity
-            android:name=".ListaDeficienciasActivity"/>
+            android:name=".visualizacao.ListaDeficienciasActivity"/>
         <activity
             android:name=".AlunoInsereDefiActivity"/>
         <activity
-            android:name=".ProfessorActivity">
+            android:name=".usuarios.ProfessorActivity">
         </activity>
     </application>
 

@@ -61,11 +61,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Matrícula" />
 
-            <EditText
-                android:id="@+id/editTextDeficiencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Deficiência (opcional)" />
         </LinearLayout>
 
         <!-- Campos específicos de Profissional do SINAP -->

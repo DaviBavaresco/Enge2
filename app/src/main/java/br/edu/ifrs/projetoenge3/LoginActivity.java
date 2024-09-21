@@ -9,8 +9,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import br.edu.ifrs.projetoenge3.usuarios.AlunoActivity;
+import br.edu.ifrs.projetoenge3.usuarios.ProfessorActivity;
+import br.edu.ifrs.projetoenge3.usuarios.SinapActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

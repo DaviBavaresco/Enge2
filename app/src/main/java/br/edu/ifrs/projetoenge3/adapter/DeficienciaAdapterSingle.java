@@ -1,12 +1,8 @@
-package br.edu.ifrs.projetoenge3;
+package br.edu.ifrs.projetoenge3.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,17 +13,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAdapterSingle.DeficienciaViewHolder>  implements Filterable {
+import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
+import br.edu.ifrs.projetoenge3.R;
 
-   List<Deficiencia> deficienciaList;
-    private List<Deficiencia> listaValoresFiltrados;
-    private ValueFilter valorFiltrado;
+public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAdapterSingle.DeficienciaViewHolder>  {
+
+     List<Deficiencia> deficienciaList;
+    public List<Deficiencia> deficienciaListFull;
+
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    Context context;
-    public DeficienciaAdapterSingle(Context context,List<Deficiencia> deficienciaList) {
-        this.context = context;
+
+    public DeficienciaAdapterSingle(List<Deficiencia> deficienciaList) {
         this.deficienciaList = deficienciaList;
-        this.listaValoresFiltrados = deficienciaList;
+        this.deficienciaListFull = new ArrayList<>(deficienciaList);
     }
 
     @NonNull
@@ -56,11 +55,31 @@ public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAd
 ;
     }
 
+    public void filterByMatricula(String matricula) {
+        if (matricula.isEmpty()) {
+            deficienciaList.clear();
+            deficienciaList.addAll(deficienciaListFull);
+        } else {
+            List<Deficiencia> filteredList = new ArrayList<>();
+            for (Deficiencia deficiencia : deficienciaListFull) {
+                if (deficiencia.getMatricula().toLowerCase().contains(matricula.toLowerCase())) {
+                    filteredList.add(deficiencia);
+                }
+            }
+            deficienciaList.clear();
+            deficienciaList.addAll(filteredList);
+        }
+        notifyDataSetChanged(); // Atualizar a RecyclerView com a lista filtrada
+    }
 
     @Override
     public int getItemCount() {
         return deficienciaList.size();
     }
+
+
+    // Método para filtrar a lista por matrícula
+
 
     // Classe ViewHolder
     public static class DeficienciaViewHolder extends RecyclerView.ViewHolder {
@@ -77,47 +96,5 @@ public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAd
             textViewStatus = itemView.findViewById(R.id.textViewStatus);
         }
     }
-
-    @Override
-    public Filter getFilter() {
-        try {
-            if (valorFiltrado == null) {
-                valorFiltrado = new ValueFilter();
-            }
-        }
-        catch (NullPointerException e){
-            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
-        }
-        return valorFiltrado;
     }
 
-    private class ValueFilter extends Filter {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            FilterResults results = new FilterResults();
-            if (constraint != null && constraint.length() > 0) {
-                List<Deficiencia> filterList = new ArrayList<>();
-                for (int i = 0; i < listaValoresFiltrados.size(); i++) {
-                    if ((listaValoresFiltrados.get(i).getMatricula().toUpperCase()).contains(constraint.toString().toUpperCase())) {
-                        filterList.add(listaValoresFiltrados.get(i));
-                    }
-                }
-                results.count = filterList.size();
-                results.values = filterList;
-            } else {
-                results.count = listaValoresFiltrados.size();
-                results.values = listaValoresFiltrados;
-            }
-            return results;
-
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint,
-                                      FilterResults results) {
-            deficienciaList = (List<Deficiencia>) results.values;
-            notifyDataSetChanged();
-        }
-
-    }
-}

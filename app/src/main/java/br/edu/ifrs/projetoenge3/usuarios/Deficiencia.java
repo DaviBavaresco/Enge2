@@ -1,4 +1,4 @@
-package br.edu.ifrs.projetoenge3;
+package br.edu.ifrs.projetoenge3.usuarios;
 import android.os.Parcel;
 import android.os.Parcelable;
 public class Deficiencia implements Parcelable{

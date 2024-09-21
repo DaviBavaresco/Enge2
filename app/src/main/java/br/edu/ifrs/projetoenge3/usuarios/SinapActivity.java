@@ -1,4 +1,4 @@
-package br.edu.ifrs.projetoenge3;
+package br.edu.ifrs.projetoenge3.usuarios;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,13 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
+import br.edu.ifrs.projetoenge3.R;
+import br.edu.ifrs.projetoenge3.RegisterActivity;
+import br.edu.ifrs.projetoenge3.visualizacao.VisualizarDeficienciasAprovadasActivity;
+import br.edu.ifrs.projetoenge3.visualizacao.VisualizarDeficienciasNegadasActivity;
+import br.edu.ifrs.projetoenge3.visualizacao.VisualizarDeficienciasPendentesActivity;
+import br.edu.ifrs.projetoenge3.visualizacao.VisualizarTodasDeficienciasEnviadasActivity;
 
 public class SinapActivity extends AppCompatActivity {
 

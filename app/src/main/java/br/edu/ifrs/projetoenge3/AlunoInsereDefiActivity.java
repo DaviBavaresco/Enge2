@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
+import br.edu.ifrs.projetoenge3.visualizacao.ListaDeficienciasActivity;
+
 public class AlunoInsereDefiActivity extends AppCompatActivity {
 
     private EditText editTextDeficiencia;

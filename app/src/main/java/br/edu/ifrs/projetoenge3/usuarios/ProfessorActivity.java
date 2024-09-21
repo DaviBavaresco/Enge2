@@ -1,4 +1,4 @@
-package br.edu.ifrs.projetoenge3;
+package br.edu.ifrs.projetoenge3.usuarios;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +7,9 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import br.edu.ifrs.projetoenge3.R;
+import br.edu.ifrs.projetoenge3.visualizacao.VisualizarDeficienciasAprovadasActivity;
 
 public class ProfessorActivity extends AppCompatActivity {
 
