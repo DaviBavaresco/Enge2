@@ -1,4 +1,4 @@
-package br.edu.ifrs.projetoenge3;
+package br.edu.ifrs.projetoenge3.insercao;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import br.edu.ifrs.projetoenge3.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

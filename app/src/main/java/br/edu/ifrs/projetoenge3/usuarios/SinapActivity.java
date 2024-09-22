@@ -9,7 +9,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import br.edu.ifrs.projetoenge3.R;
-import br.edu.ifrs.projetoenge3.RegisterActivity;
+import br.edu.ifrs.projetoenge3.insercao.RegisterActivity;
 import br.edu.ifrs.projetoenge3.visualizacao.VisualizarDeficienciasAprovadasActivity;
 import br.edu.ifrs.projetoenge3.visualizacao.VisualizarDeficienciasNegadasActivity;
 import br.edu.ifrs.projetoenge3.visualizacao.VisualizarDeficienciasPendentesActivity;

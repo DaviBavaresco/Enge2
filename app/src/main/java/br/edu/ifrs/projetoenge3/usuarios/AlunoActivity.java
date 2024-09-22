@@ -11,24 +11,37 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import br.edu.ifrs.projetoenge3.AlunoInsereDefiActivity;
+import br.edu.ifrs.projetoenge3.insercao.AlunoInsereDefiActivity;
 import br.edu.ifrs.projetoenge3.R;
+import br.edu.ifrs.projetoenge3.visualizacao.AlunoVisualizaDefiActivity;
 
 public class AlunoActivity extends AppCompatActivity {
 
 
     private Button btnInsere;
+    private Button btnLista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_aluno);
         btnInsere = findViewById(R.id.btnInsere);
+        btnLista = findViewById(R.id.btnLista);
 
         btnInsere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AlunoActivity.this, AlunoInsereDefiActivity.class);
+                startActivity(intent);
+            }
+
+        });
+
+        //Para listar as deficiencias do aluno enviadas
+        btnLista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AlunoActivity.this, AlunoVisualizaDefiActivity.class);
                 startActivity(intent);
             }
 

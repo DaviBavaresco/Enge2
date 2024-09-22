@@ -1,4 +1,4 @@
-package br.edu.ifrs.projetoenge3;
+package br.edu.ifrs.projetoenge3.insercao;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.edu.ifrs.projetoenge3.R;
 import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
 import br.edu.ifrs.projetoenge3.visualizacao.ListaDeficienciasActivity;
 
@@ -28,7 +29,7 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
     private EditText editTextDeficiencia;
     private EditText editTextExplica;
     private Button buttonEnviarDeficiencia;
-    private Button buttonListarDeficiencias;
+
     private ProgressBar progressBar;
 
     private FirebaseAuth auth;
@@ -51,7 +52,6 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
         editTextDeficiencia = findViewById(R.id.editTextDeficiencia);
         editTextExplica = findViewById(R.id.editTextExplica);
         buttonEnviarDeficiencia = findViewById(R.id.buttonEnviarDeficiencia);
-        buttonListarDeficiencias = findViewById(R.id.buttonListarDeficiencias); // Botão para listar as deficiências
         progressBar = findViewById(R.id.progressBar);
 
         // Obter matrícula do aluno
@@ -68,14 +68,15 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
                     editTextDeficiencia.setError("Insira a deficiência");
                     return;
                 }
+                if (explica.isEmpty()) {
+                    editTextDeficiencia.setError("Explique sua deficiência");
+                    return;
+                }
 
                 enviarDeficienciaAoSinap(deficiencia, explica);
             }
         });
-        // Configurar o botão para listar as deficiências
-        buttonListarDeficiencias.setOnClickListener(v -> {
-            listarDeficienciasDoAluno();
-        });
+
     }
 
     // Método para obter os dados do aluno (como matrícula) da coleção "usuarios"
@@ -135,6 +136,7 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(AlunoInsereDefiActivity.this, "Deficiência enviada com sucesso!", Toast.LENGTH_SHORT).show();
                                 editTextDeficiencia.setText("");  // Limpar o campo de texto
+                                editTextExplica.setText("");  // Limpar o campo de texto
                             })
                             .addOnFailureListener(e -> {
                                 progressBar.setVisibility(View.GONE);
@@ -147,33 +149,6 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
                 });
     }
 
-    // Método para listar as deficiências do aluno
-    private void listarDeficienciasDoAluno() {
-        progressBar.setVisibility(View.VISIBLE);
-
-        db.collection("deficiencias")
-                .whereEqualTo("userId", userId)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    List<Deficiencia> deficiencias = new ArrayList<>();
-                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        Deficiencia deficiencia = documentSnapshot.toObject(Deficiencia.class);
-                        deficiencia.setDocumentId(documentSnapshot.getId());  // Adicionar o documentId
-                        deficiencias.add(deficiencia);
-                    }
-
-                    // Passar a lista de deficiências para a nova Activity para exibição
-                    Intent intent = new Intent(AlunoInsereDefiActivity.this, ListaDeficienciasActivity.class);
-                    intent.putParcelableArrayListExtra("deficiencias", new ArrayList<>(deficiencias));  // Agora funciona
-                    startActivity(intent);
-
-                    progressBar.setVisibility(View.GONE);
-                })
-                .addOnFailureListener(e -> {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(AlunoInsereDefiActivity.this, "Erro ao buscar deficiências: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
-    }
 
 
 }

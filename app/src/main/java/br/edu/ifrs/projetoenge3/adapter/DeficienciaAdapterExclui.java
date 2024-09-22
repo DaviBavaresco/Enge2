@@ -1,8 +1,10 @@
 package br.edu.ifrs.projetoenge3.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,36 +12,36 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
 import br.edu.ifrs.projetoenge3.R;
+import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
 
-public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAdapterSingle.DeficienciaViewHolder>  {
+public class DeficienciaAdapterExclui extends RecyclerView.Adapter<DeficienciaAdapterExclui.DeficienciaViewHolder> {
 
      List<Deficiencia> deficienciaList;
-    public List<Deficiencia> deficienciaListFull;
+    Deficiencia deficiencia;
 
+    Context context;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public DeficienciaAdapterSingle(List<Deficiencia> deficienciaList) {
+    public DeficienciaAdapterExclui(Context context,List<Deficiencia> deficienciaList) {
         this.deficienciaList = deficienciaList;
-        this.deficienciaListFull = new ArrayList<>(deficienciaList);
+        this.context = context;
     }
 
     @NonNull
     @Override
     public DeficienciaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_deficiencia_visualizar, parent, false);
+                .inflate(R.layout.item_deficiencia_negado_aluno, parent, false);
         return new DeficienciaViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DeficienciaViewHolder holder, int position) {
-        Deficiencia deficiencia = deficienciaList.get(position);
+         deficiencia = deficienciaList.get(position);
 
         holder.textViewMatricula.setText("Matrícula: " + deficiencia.getMatricula());
         holder.textViewDeficiencia.setText("Deficiência: " + deficiencia.getDeficiencia());
@@ -48,35 +50,30 @@ public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAd
 
         if (deficiencia.getDocumentId() == null) {
             holder.textViewMatricula.setText("Erro: documentId não encontrado");
+            return;
         }
 
-
+        // Quando o botão excluir é clicado
+        holder.buttonExclu.setOnClickListener(v -> {
+            db.collection("deficiencias").document(deficiencia.getDocumentId()).delete()
+                    .addOnSuccessListener(aVoid -> {
+                        deficienciaList.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, deficienciaList.size());
+                    })
+                    .addOnFailureListener(e -> {
+                        e.printStackTrace();
+                    });
+        });
 
     }
-    // Método para filtrar a lista por matrícula
-    public void filterByMatricula(String matricula) {
-        if (matricula.isEmpty()) {
-            deficienciaList.clear();
-            deficienciaList.addAll(deficienciaListFull);
-        } else {
-            List<Deficiencia> filteredList = new ArrayList<>();
-            for (Deficiencia deficiencia : deficienciaListFull) {
-                if (deficiencia.getMatricula().toLowerCase().contains(matricula.toLowerCase())) {
-                    filteredList.add(deficiencia);
-                }
-            }
-            deficienciaList.clear();
-            deficienciaList.addAll(filteredList);
-        }
-        notifyDataSetChanged(); // Atualizar a RecyclerView com a lista filtrada
-    }
+
+
 
     @Override
     public int getItemCount() {
         return deficienciaList.size();
     }
-
-
 
 
 
@@ -86,6 +83,7 @@ public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAd
         public TextView textViewDeficiencia;
         public TextView textViewExplica;
         public TextView textViewStatus;
+        public Button buttonExclu;
 
         public DeficienciaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,7 +91,7 @@ public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAd
             textViewDeficiencia = itemView.findViewById(R.id.textViewDeficiencia);
             textViewExplica = itemView.findViewById(R.id.textViewExplica);
             textViewStatus = itemView.findViewById(R.id.textViewStatus);
+            buttonExclu = itemView.findViewById(R.id.buttonExclu);
         }
     }
-    }
-
+}

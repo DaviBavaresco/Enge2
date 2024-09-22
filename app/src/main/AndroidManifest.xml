@@ -29,7 +29,7 @@
         <activity
             android:name=".usuarios.SinapActivity"/>
         <activity
-            android:name=".RegisterActivity"/>
+            android:name=".insercao.RegisterActivity"/>
         <activity
             android:name=".visualizacao.VisualizarDeficienciasPendentesActivity"/>
         <activity
@@ -41,7 +41,9 @@
         <activity
             android:name=".visualizacao.ListaDeficienciasActivity"/>
         <activity
-            android:name=".AlunoInsereDefiActivity"/>
+            android:name=".visualizacao.AlunoVisualizaDefiActivity"/>
+        <activity
+            android:name=".insercao.AlunoInsereDefiActivity"/>
         <activity
             android:name=".usuarios.ProfessorActivity">
         </activity>
