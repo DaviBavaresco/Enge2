@@ -9,7 +9,7 @@ public class Deficiencia implements Parcelable{
     private String status;
 
     public Deficiencia() {
-        // Construtor vazio necessário para o Firebase
+        // Construtor vazio necessario para o Firebase
     }
 
     public Deficiencia(String documentId, String matricula, String deficiencia, String explica) {

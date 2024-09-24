@@ -2,10 +2,7 @@ package br.edu.ifrs.projetoenge3.visualizacao;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,9 +13,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 import br.edu.ifrs.projetoenge3.R;
 import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
@@ -61,12 +58,6 @@ public class AlunoVisualizaDefiActivity extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                             matricula = documentSnapshot.getString("matricula");
-
-                            if (matricula != null) {
-                                Toast.makeText(AlunoVisualizaDefiActivity.this, "Matrícula: " + matricula, Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(AlunoVisualizaDefiActivity.this, "Matrícula não encontrada.", Toast.LENGTH_SHORT).show();
-                            }
                         } else {
                             Toast.makeText(AlunoVisualizaDefiActivity.this, "Usuário não encontrado.", Toast.LENGTH_SHORT).show();
                         }

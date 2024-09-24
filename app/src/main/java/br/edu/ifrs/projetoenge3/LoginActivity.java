@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                                     .addOnFailureListener(e -> {
                                         Toast.makeText(LoginActivity.this, "Erro ao verificar usuário: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                     });} else {
-                            Toast.makeText(LoginActivity.this, "Erro de login: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Email ou senha incorreto", Toast.LENGTH_SHORT).show();
                         }
                     });
         });

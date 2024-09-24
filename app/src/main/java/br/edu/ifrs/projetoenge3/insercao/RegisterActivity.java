@@ -78,11 +78,11 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // Nada a fazer
+
             }
         });
 
-        // Lógica de cadastro ao clicar no botão
+        // Logica de cadastro ao clicar no botão
         registerButton.setOnClickListener(v -> {
             String email = emailField.getText().toString().trim();
             String password = passwordField.getText().toString().trim();

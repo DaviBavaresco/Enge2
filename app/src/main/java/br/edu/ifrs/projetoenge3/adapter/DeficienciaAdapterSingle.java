@@ -53,7 +53,7 @@ public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAd
 
 
     }
-    // Método para filtrar a lista por matrícula
+    // Metodo para filtrar a lista por matrícula
     public void filterByMatricula(String matricula) {
         if (matricula.isEmpty()) {
             deficienciaList.clear();

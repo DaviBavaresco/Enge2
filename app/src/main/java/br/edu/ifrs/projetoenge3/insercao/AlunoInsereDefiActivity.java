@@ -22,6 +22,8 @@ import java.util.Map;
 
 import br.edu.ifrs.projetoenge3.R;
 import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
+import br.edu.ifrs.projetoenge3.usuarios.AlunoActivity;
+import br.edu.ifrs.projetoenge3.visualizacao.AlunoVisualizaDefiActivity;
 import br.edu.ifrs.projetoenge3.visualizacao.ListaDeficienciasActivity;
 
 public class AlunoInsereDefiActivity extends AppCompatActivity {
@@ -69,7 +71,7 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
                     return;
                 }
                 if (explica.isEmpty()) {
-                    editTextDeficiencia.setError("Explique sua deficiência");
+                    editTextExplica.setError("Explique sua deficiência");
                     return;
                 }
 
@@ -89,14 +91,6 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                             matricula = documentSnapshot.getString("matricula");
-
-                            if (matricula != null) {
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(AlunoInsereDefiActivity.this, "Matrícula: " + matricula, Toast.LENGTH_SHORT).show();
-                            } else {
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(AlunoInsereDefiActivity.this, "Matrícula não encontrada.", Toast.LENGTH_SHORT).show();
-                            }
                         } else {
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(AlunoInsereDefiActivity.this, "Usuário não encontrado.", Toast.LENGTH_SHORT).show();
@@ -112,7 +106,7 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
                 });
     }
 
-    // Método para enviar a deficiência ao SINAP, salvando no Firestore
+    // metodo para enviar a deficiência ao SINAP, salvando no Firestore
     private void enviarDeficienciaAoSinap(String deficiencia, String explica) {
         progressBar.setVisibility(View.VISIBLE);
 
@@ -137,6 +131,9 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
                                 Toast.makeText(AlunoInsereDefiActivity.this, "Deficiência enviada com sucesso!", Toast.LENGTH_SHORT).show();
                                 editTextDeficiencia.setText("");  // Limpar o campo de texto
                                 editTextExplica.setText("");  // Limpar o campo de texto
+                                Intent intent = new Intent(AlunoInsereDefiActivity.this, AlunoActivity.class);
+                                startActivity(intent);
+
                             })
                             .addOnFailureListener(e -> {
                                 progressBar.setVisibility(View.GONE);

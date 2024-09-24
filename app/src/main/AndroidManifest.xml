@@ -41,9 +41,13 @@
         <activity
             android:name=".visualizacao.ListaDeficienciasActivity"/>
         <activity
-            android:name=".visualizacao.AlunoVisualizaDefiActivity"/>
+            android:name=".visualizacao.AlunoVisualizaDefiActivity" android:parentActivityName=".usuarios.AlunoActivity">
+        <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".usuarios.AlunoActivity" />
+        </activity>
         <activity
-            android:name=".insercao.AlunoInsereDefiActivity"/>
+            android:name=".insercao.AlunoInsereDefiActivity" android:parentActivityName=".usuarios.AlunoActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".usuarios.AlunoActivity" />
+        </activity>
         <activity
             android:name=".usuarios.ProfessorActivity">
         </activity>

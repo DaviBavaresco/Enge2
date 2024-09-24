@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +15,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
+import br.edu.ifrs.projetoenge3.LoginActivity;
 import br.edu.ifrs.projetoenge3.R;
+import br.edu.ifrs.projetoenge3.insercao.AlunoInsereDefiActivity;
 import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
 
 public class DeficienciaAdapterExclui extends RecyclerView.Adapter<DeficienciaAdapterExclui.DeficienciaViewHolder> {
@@ -60,6 +63,7 @@ public class DeficienciaAdapterExclui extends RecyclerView.Adapter<DeficienciaAd
                         deficienciaList.remove(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, deficienciaList.size());
+                        Toast.makeText(context, "Deficiencia excluida com sucesso", Toast.LENGTH_SHORT).show();
                     })
                     .addOnFailureListener(e -> {
                         e.printStackTrace();

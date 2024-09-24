@@ -1,10 +1,13 @@
 package br.edu.ifrs.projetoenge3.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,9 +25,12 @@ public class DeficienciaAdapter extends RecyclerView.Adapter<DeficienciaAdapter.
     public List<Deficiencia> deficienciaListFull;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public DeficienciaAdapter(List<Deficiencia> deficienciaList) {
+    Context context;
+
+    public DeficienciaAdapter(Context context, List<Deficiencia> deficienciaList) {
         this.deficienciaList = deficienciaList;
         this.deficienciaListFull = new ArrayList<>(deficienciaList);
+        this.context = context;
     }
 
     @NonNull
@@ -41,15 +47,11 @@ public class DeficienciaAdapter extends RecyclerView.Adapter<DeficienciaAdapter.
 
         holder.textViewMatricula.setText("Matrícula: " + deficiencia.getMatricula());
         holder.textViewDeficiencia.setText("Deficiência: " + deficiencia.getDeficiencia());
-        holder.textViewExplica.setText("explicacao: " + deficiencia.getExplica());
+        holder.textViewExplica.setText("Explicacao: " + deficiencia.getExplica());
         holder.textViewStatus.setText("Status: " + deficiencia.getStatus());
 
-        if (deficiencia.getDocumentId() == null) {
-            holder.textViewMatricula.setText("Erro: documentId não encontrado");
-            return;
-        }
 
-        // Quando o botão Aprovar é clicado, o status é atualizado para "validado"
+        // Quando o botao Aprovar e clicado o status e atualizado para "validado"
         holder.buttonAprovar.setOnClickListener(v -> {
             db.collection("deficiencias").document(deficiencia.getDocumentId())
                     .update("status", "validado")
@@ -57,13 +59,14 @@ public class DeficienciaAdapter extends RecyclerView.Adapter<DeficienciaAdapter.
                         deficienciaList.remove(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, deficienciaList.size());
+                        Toast.makeText(context, "Deficiencia validada com sucesso", Toast.LENGTH_SHORT).show();
                     })
                     .addOnFailureListener(e -> {
                         e.printStackTrace();
                     });
         });
 
-        // Quando o botão Negar é clicado, o status é atualizado para "negado"
+        // Quando o botao Negar e clicado o status e atualizado para "negado"
         holder.buttonNegar.setOnClickListener(v -> {
             db.collection("deficiencias").document(deficiencia.getDocumentId())
                     .update("status", "negado")
@@ -71,6 +74,7 @@ public class DeficienciaAdapter extends RecyclerView.Adapter<DeficienciaAdapter.
                         deficienciaList.remove(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, deficienciaList.size());
+                        Toast.makeText(context, "Deficiencia negada com sucesso", Toast.LENGTH_SHORT).show();
                     })
                     .addOnFailureListener(e -> {
                         e.printStackTrace();
