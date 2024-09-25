@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import br.edu.ifrs.projetoenge3.insercao.AlunoInsereDefiActivity;
 import br.edu.ifrs.projetoenge3.R;
-import br.edu.ifrs.projetoenge3.visualizacao.AlunoVisualizaDefiActivity;
+import br.edu.ifrs.projetoenge3.visualizacao.ListaDeficienciasActivity;
 
 public class AlunoActivity extends AppCompatActivity {
 
@@ -41,7 +41,7 @@ public class AlunoActivity extends AppCompatActivity {
         btnLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AlunoActivity.this, AlunoVisualizaDefiActivity.class);
+                Intent intent = new Intent(AlunoActivity.this, ListaDeficienciasActivity.class);
                 startActivity(intent);
             }
 

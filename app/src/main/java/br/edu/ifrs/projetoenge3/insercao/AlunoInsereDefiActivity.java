@@ -15,16 +15,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import br.edu.ifrs.projetoenge3.R;
-import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
 import br.edu.ifrs.projetoenge3.usuarios.AlunoActivity;
-import br.edu.ifrs.projetoenge3.visualizacao.AlunoVisualizaDefiActivity;
-import br.edu.ifrs.projetoenge3.visualizacao.ListaDeficienciasActivity;
 
 public class AlunoInsereDefiActivity extends AppCompatActivity {
 
