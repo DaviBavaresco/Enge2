@@ -1,5 +1,6 @@
 package br.edu.ifrs.projetoenge3.insercao;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,6 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.edu.ifrs.projetoenge3.R;
+import br.edu.ifrs.projetoenge3.usuarios.AlunoActivity;
+import br.edu.ifrs.projetoenge3.usuarios.SinapActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -29,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     private LinearLayout layoutAluno, layoutSINAP, layoutProfessor;
     private FirebaseAuth auth;
     private FirebaseFirestore db;
+    String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
         userTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                String userType = parentView.getItemAtPosition(position).toString();
+                 userType = parentView.getItemAtPosition(position).toString();
                 if (userType.equals("Aluno")) {
                     layoutAluno.setVisibility(View.VISIBLE);
                     layoutSINAP.setVisibility(View.GONE);
@@ -88,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
             String password = passwordField.getText().toString().trim();
             String userType = userTypeSpinner.getSelectedItem().toString();
 
+
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(RegisterActivity.this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
                 return;
@@ -108,16 +113,32 @@ public class RegisterActivity extends AppCompatActivity {
                                 String cpf = cpfField.getText().toString().trim();
                                 String matricula = matriculaField.getText().toString().trim();
 
+                                if (nome.isEmpty()) {
+                                    nomeField.setError("Insira a deficiência");
+                                    return;
+                                } else if(cpf.isEmpty()) {
+                                    cpf = "CPF não informado";
+                                } else if(matricula.isEmpty()) {
+                                    matricula = "Matricula não informada";
+                                }
+
                                 userMap.put("nome", nome);
                                 userMap.put("CPF", cpf);
                                 userMap.put("matricula", matricula);
 
-                            } // SINAP e Professor podem ter campos adicionais aqui
+                            }
 
                             // Salvar no Firestore
                             db.collection("usuarios").document(userID).set(userMap)
                                     .addOnSuccessListener(aVoid -> {
                                         Toast.makeText(RegisterActivity.this, "Usuário registrado com sucesso!", Toast.LENGTH_SHORT).show();
+                                        emailField.setText("");
+                                        passwordField.setText("");
+                                        nomeField.setText("");
+                                        cpfField.setText("");
+                                        matriculaField.setText("");
+                                        Intent intent = new Intent(RegisterActivity.this, SinapActivity.class);
+                                        startActivity(intent);
                                         // Redirecionar ou finalizar
                                     })
                                     .addOnFailureListener(e -> {

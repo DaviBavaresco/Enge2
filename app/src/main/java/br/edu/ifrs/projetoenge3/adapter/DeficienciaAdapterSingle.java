@@ -1,5 +1,6 @@
 package br.edu.ifrs.projetoenge3.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,11 @@ public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAd
      List<Deficiencia> deficienciaList;
     public List<Deficiencia> deficienciaListFull;
 
-
+    Context context;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public DeficienciaAdapterSingle(List<Deficiencia> deficienciaList) {
+    public DeficienciaAdapterSingle(Context context,List<Deficiencia> deficienciaList) {
+        this.context = context;
         this.deficienciaList = deficienciaList;
         this.deficienciaListFull = new ArrayList<>(deficienciaList);
     }
@@ -45,6 +47,15 @@ public class DeficienciaAdapterSingle extends RecyclerView.Adapter<DeficienciaAd
         holder.textViewDeficiencia.setText("Deficiência: " + deficiencia.getDeficiencia());
         holder.textViewExplica.setText("explicacao: " + deficiencia.getExplica());
         holder.textViewStatus.setText("Status: " + deficiencia.getStatus());
+
+        //altera a cor do campo para a pessoa compreender o estado do chamado mais rapido
+        if (deficiencia.getStatus().toString().equals("negado")) {
+            holder.textViewStatus.setTextColor(context.getResources().getColor(R.color.red));
+        } else if (deficiencia.getStatus().toString().equals("validado")) {
+            holder.textViewStatus.setTextColor(context.getResources().getColor(R.color.green));
+        } else if (deficiencia.getStatus().toString().equals("pendente")) {
+            holder.textViewStatus.setTextColor(context.getResources().getColor(R.color.yellow));
+        }
 
         if (deficiencia.getDocumentId() == null) {
             holder.textViewMatricula.setText("Erro: documentId não encontrado");

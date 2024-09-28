@@ -39,7 +39,7 @@ public class VisualizarDeficienciasNegadasActivity extends AppCompatActivity {
         searchViewMatricula = findViewById(R.id.searchViewMatricula);
 
         deficienciaList = new ArrayList<>();
-        adapter = new DeficienciaAdapterSingle(deficienciaList);
+        adapter = new DeficienciaAdapterSingle(this,deficienciaList);
         recyclerView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();

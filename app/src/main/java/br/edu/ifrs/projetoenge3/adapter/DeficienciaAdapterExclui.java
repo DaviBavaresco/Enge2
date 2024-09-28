@@ -1,6 +1,8 @@
 package br.edu.ifrs.projetoenge3.adapter;
 
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import java.util.List;
 
 import br.edu.ifrs.projetoenge3.LoginActivity;
 import br.edu.ifrs.projetoenge3.R;
+import br.edu.ifrs.projetoenge3.edicao.EditDeficienciaActivity;
 import br.edu.ifrs.projetoenge3.insercao.AlunoInsereDefiActivity;
 import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
 
@@ -44,17 +47,37 @@ public class DeficienciaAdapterExclui extends RecyclerView.Adapter<DeficienciaAd
 
     @Override
     public void onBindViewHolder(@NonNull DeficienciaViewHolder holder, int position) {
-         deficiencia = deficienciaList.get(position);
+        Deficiencia deficiencia = deficienciaList.get(position);
 
         holder.textViewMatricula.setText("Matrícula: " + deficiencia.getMatricula());
         holder.textViewDeficiencia.setText("Deficiência: " + deficiencia.getDeficiencia());
         holder.textViewExplica.setText("explicacao: " + deficiencia.getExplica());
         holder.textViewStatus.setText("Status: " + deficiencia.getStatus());
 
+        //altera a cor do campo para a pessoa compreender o estado do chamado mais rapido
+        if (deficiencia.getStatus().toString().equals("negado")) {
+            holder.textViewStatus.setTextColor(context.getResources().getColor(R.color.red));
+            holder.buttonEdit.setVisibility(View.GONE);
+        } else if (deficiencia.getStatus().toString().equals("validado")) {
+            holder.textViewStatus.setTextColor(context.getResources().getColor(R.color.green));
+            holder.buttonEdit.setVisibility(View.GONE);
+        } else if (deficiencia.getStatus().toString().equals("pendente")) {
+            holder.textViewStatus.setTextColor(context.getResources().getColor(R.color.yellow));
+        }
+
+
         if (deficiencia.getDocumentId() == null) {
             holder.textViewMatricula.setText("Erro: documentId não encontrado");
             return;
         }
+
+
+        //edicao
+        holder.buttonEdit.setOnClickListener(v -> {
+            Intent intent = new Intent(context, EditDeficienciaActivity.class);
+            intent.putExtra("deficiencia", deficiencia); // Passa a deficiência selecionada
+            context.startActivity(intent);
+        });
 
         // Quando o botão excluir é clicado
         holder.buttonExclu.setOnClickListener(v -> {
@@ -88,6 +111,7 @@ public class DeficienciaAdapterExclui extends RecyclerView.Adapter<DeficienciaAd
         public TextView textViewExplica;
         public TextView textViewStatus;
         public Button buttonExclu;
+        public Button buttonEdit;
 
         public DeficienciaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,6 +120,7 @@ public class DeficienciaAdapterExclui extends RecyclerView.Adapter<DeficienciaAd
             textViewExplica = itemView.findViewById(R.id.textViewExplica);
             textViewStatus = itemView.findViewById(R.id.textViewStatus);
             buttonExclu = itemView.findViewById(R.id.buttonExclu);
+            buttonEdit = itemView.findViewById(R.id.buttonEdit);
         }
     }
 }

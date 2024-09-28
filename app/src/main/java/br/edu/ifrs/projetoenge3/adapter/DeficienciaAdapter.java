@@ -51,6 +51,16 @@ public class DeficienciaAdapter extends RecyclerView.Adapter<DeficienciaAdapter.
         holder.textViewStatus.setText("Status: " + deficiencia.getStatus());
 
 
+        //altera a cor do campo para a pessoa compreender o estado do chamado mais rapido
+        if (deficiencia.getStatus().toString().equals("negado")) {
+            holder.textViewStatus.setTextColor(context.getResources().getColor(R.color.red));
+        } else if (deficiencia.getStatus().toString().equals("validado")) {
+            holder.textViewStatus.setTextColor(context.getResources().getColor(R.color.green));
+        } else if (deficiencia.getStatus().toString().equals("pendente")) {
+            holder.textViewStatus.setTextColor(context.getResources().getColor(R.color.yellow));
+        }
+
+
         // Quando o botao Aprovar e clicado o status e atualizado para "validado"
         holder.buttonAprovar.setOnClickListener(v -> {
             db.collection("deficiencias").document(deficiencia.getDocumentId())

@@ -59,6 +59,15 @@
                 android:textColor="@android:color/white"
                 android:backgroundTint="@android:color/holo_red_dark"
                 android:layout_marginStart="16dp"/>
+
+            <Button
+                android:id="@+id/buttonEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/holo_blue_light"
+                android:layout_marginStart="16dp"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

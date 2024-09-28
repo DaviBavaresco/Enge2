@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewMatricula"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:hint="Matrícula" />
+
+    <EditText
+        android:id="@+id/editTextDeficiencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deficiência" />
+
+    <EditText
+        android:id="@+id/editTextExplica"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Explicação" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar" />
+</LinearLayout>
