@@ -98,6 +98,31 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
+            // Validação de campos específicos para o tipo de usuario "Aluno"
+            if (userType.equals("Aluno")) {
+                String nome = nomeField.getText().toString().trim();
+                String cpf = cpfField.getText().toString().trim();
+                String matricula = matriculaField.getText().toString().trim();
+
+                // Verifica se o campo nome está vazio
+                if (TextUtils.isEmpty(nome)) {
+                    nomeField.setError("Insira o nome");
+                    return;
+                }
+
+                // Verifica se o campo CPF está vazio
+                if (TextUtils.isEmpty(cpf)) {
+                    cpfField.setError("Insira o CPF");
+                    return;
+                }
+
+                // Verifica se o campo matrícula está vazio
+                if (TextUtils.isEmpty(matricula)) {
+                    matriculaField.setError("Insira a matrícula");
+                    return;
+                }
+            }
+
             // Criar conta com Firebase Auth
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
@@ -112,15 +137,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 String nome = nomeField.getText().toString().trim();
                                 String cpf = cpfField.getText().toString().trim();
                                 String matricula = matriculaField.getText().toString().trim();
-
-                                if (nome.isEmpty()) {
-                                    nomeField.setError("Insira a deficiência");
-                                    return;
-                                } else if(cpf.isEmpty()) {
-                                    cpf = "CPF não informado";
-                                } else if(matricula.isEmpty()) {
-                                    matricula = "Matricula não informada";
-                                }
 
                                 userMap.put("nome", nome);
                                 userMap.put("CPF", cpf);

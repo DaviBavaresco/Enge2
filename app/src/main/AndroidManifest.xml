@@ -42,7 +42,6 @@
             android:name=".visualizacao.ListaDeficienciasActivity" />
         <activity
             android:name=".insercao.AlunoInsereDefiActivity" android:parentActivityName=".usuarios.AlunoActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".usuarios.AlunoActivity" />
         </activity>
         <activity
             android:name=".usuarios.ProfessorActivity">
