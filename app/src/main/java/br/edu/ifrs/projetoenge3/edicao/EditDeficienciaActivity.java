@@ -1,5 +1,6 @@
 package br.edu.ifrs.projetoenge3.edicao;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import br.edu.ifrs.projetoenge3.R;
+import br.edu.ifrs.projetoenge3.usuarios.AlunoActivity;
 import br.edu.ifrs.projetoenge3.usuarios.Deficiencia;
+import br.edu.ifrs.projetoenge3.visualizacao.ListaDeficienciasActivity;
 
 public class EditDeficienciaActivity extends AppCompatActivity {
 
@@ -58,7 +61,9 @@ public class EditDeficienciaActivity extends AppCompatActivity {
                 .update("matricula", novaMatricula, "deficiencia", novaDeficiencia, "explica", novaExplicacao)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(EditDeficienciaActivity.this, "Deficiência atualizada com sucesso", Toast.LENGTH_SHORT).show();
-                    finish(); // Fecha a activity após salvar
+                    Intent intent = new Intent(EditDeficienciaActivity.this, ListaDeficienciasActivity.class);
+                    startActivity(intent);
+                    //finish(); // Fecha a activity após salvar
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(EditDeficienciaActivity.this, "Erro ao atualizar deficiência", Toast.LENGTH_SHORT).show();

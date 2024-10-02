@@ -53,13 +53,15 @@
                 android:id="@+id/editTextCPF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="CPF" />
+                android:hint="CPF"
+                android:inputType="number"/>
 
             <EditText
                 android:id="@+id/editTextMatricula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Matrícula" />
+                android:hint="Matrícula"
+                android:inputType="number"/>
 
         </LinearLayout>
 

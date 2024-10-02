@@ -92,7 +92,10 @@ public class RegisterActivity extends AppCompatActivity {
             String password = passwordField.getText().toString().trim();
             String userType = userTypeSpinner.getSelectedItem().toString();
 
-
+            if(password.length()<6){
+                Toast.makeText(RegisterActivity.this, "Senha precisa ser maior que 5 caracteres", Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(RegisterActivity.this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
                 return;
@@ -162,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     });
 
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Falha no cadastro: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Falha no cadastro", Toast.LENGTH_SHORT).show();
                         }
                     });
         });
