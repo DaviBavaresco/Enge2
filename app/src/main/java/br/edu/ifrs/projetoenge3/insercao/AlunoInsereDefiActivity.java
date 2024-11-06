@@ -116,9 +116,9 @@ public class AlunoInsereDefiActivity extends AppCompatActivity {
         // Salvar a deficiência na coleção "deficiencias"
         db.collection("deficiencias").add(dadosDeficiencia)
                 .addOnSuccessListener(documentReference -> {
-                    String documentId = documentReference.getId();  // Aqui você obtém o ID do documento
+                    String documentId = documentReference.getId();  // Aqui obtém o ID do documento
 
-                    // Atualize o documento com o documentId se precisar, ou use esse ID no futuro
+
                     db.collection("deficiencias").document(documentId)
                             .update("documentId", documentId)  // Atualizar com o próprio ID gerado
                             .addOnSuccessListener(aVoid -> {

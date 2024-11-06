@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import br.edu.ifrs.projetoenge3.insercao.AlunoInsereDefiActivity;
 import br.edu.ifrs.projetoenge3.R;
 import br.edu.ifrs.projetoenge3.visualizacao.ListaDeficienciasActivity;
@@ -20,6 +22,8 @@ public class AlunoActivity extends AppCompatActivity {
 
     private Button btnInsere;
     private Button btnLista;
+    private Button btnSair;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,7 @@ public class AlunoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_aluno);
         btnInsere = findViewById(R.id.btnInsere);
         btnLista = findViewById(R.id.btnLista);
+        btnSair = findViewById(R.id.btnSair);
 
         btnInsere.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +50,15 @@ public class AlunoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
+        });
+
+        //Para sair da aplicacao
+        btnSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
+            }
         });
 
 

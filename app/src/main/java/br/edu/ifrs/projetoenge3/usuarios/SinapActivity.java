@@ -8,6 +8,8 @@ import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import br.edu.ifrs.projetoenge3.R;
 import br.edu.ifrs.projetoenge3.insercao.RegisterActivity;
 import br.edu.ifrs.projetoenge3.visualizacao.VisualizarDeficienciasAprovadasActivity;
@@ -22,6 +24,7 @@ public class SinapActivity extends AppCompatActivity {
     private Button btnVisualizaNegadas;
     private Button btnVisualizaTodas;
     private Button btnCadastrar;
+    private Button btnSair;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,7 @@ public class SinapActivity extends AppCompatActivity {
         btnVisualizaNegadas = findViewById(R.id.button3);
         btnVisualizaTodas = findViewById(R.id.button4);
         btnCadastrar = findViewById(R.id.btn);
+        btnSair = findViewById(R.id.btnSair);
 
         btnVisualizaPendentes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +81,15 @@ public class SinapActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
+        });
+
+        //Para sair da aplicacao
+        btnSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
+            }
         });
 
     }
